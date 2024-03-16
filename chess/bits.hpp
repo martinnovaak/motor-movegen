@@ -22,7 +22,7 @@ static std::uint8_t count_bits(const std::uint64_t mask)
     return std::popcount(mask);
 }
 
-static Square remove_lsb(std::uint64_t & bitboard) {
+static Square pop_lsb(std::uint64_t & bitboard) {
     const Square index = lsb(bitboard);
     bitboard &= bitboard - 1;
     return index;
