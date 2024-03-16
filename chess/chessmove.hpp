@@ -38,10 +38,6 @@ class chessmove {
 public:
     chessmove() : packed_move_data{} {}
 
-    chessmove(Square from, Square to, MoveType move_type) {
-        packed_move_data = from | to << 6 | move_type << 12;
-    }
-
     chessmove(Square from, Square to, MoveType move_type, Piece piece_type) {
         packed_move_data = from | to << 6 | move_type << 12 | piece_type << 16;
     }

@@ -15,7 +15,7 @@ public:
 
     movelist() : pseudolegal_moves{}, count{} {}
 
-    [[nodiscard]] std::uint8_t size() const {
+    [[nodiscard]] int size() const {
         return count;
     }
 
