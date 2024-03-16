@@ -65,4 +65,18 @@ Square square_from_string(const std::string &s) {
     return Square::Null_Square;
 }
 
+char piece_to_char(Piece piece, Color color) {
+    char piece_char;
+    switch (piece) {
+        case Pawn:   piece_char = 'p'; break;
+        case Knight: piece_char = 'n'; break;
+        case Bishop: piece_char = 'b'; break;
+        case Rook:   piece_char = 'r'; break;
+        case Queen:  piece_char = 'q'; break;
+        case King:   piece_char = 'k'; break;
+        default:            piece_char = '.'; break;
+    }
+    return color == White ? std::toupper(piece_char) : piece_char;
+}
+
 #endif //MOTOR_FEN_UTILIS_HPP

@@ -220,6 +220,11 @@ public:
         return lsb(bitboards[side][King]);
     }
 
+    template <Color color>
+    [[nodiscard]] Square get_king_square() const {
+        return lsb(bitboards[color][King]);
+    }
+
     [[nodiscard]] std::uint64_t get_occupancy() const {
         return occupancy;
     }
@@ -328,7 +333,7 @@ public:
         fifty_move_clock++;
 
         chessmove move;
-        history.emplace_back(castling_rights, enpassant, fifty_move_clock, Piece::Null_Piece, move, hash_key);
+        history.emplace_back(castling_rights, enpassant, fifty_move_clock, move, hash_key);
     }
 
     template<Color color>
@@ -389,6 +394,18 @@ public:
         fifty_move_clock = b_info.fifty_move_clock;
         castling_rights = b_info.castling_rights;
         hash_key = b_info.hash_key;
+    }
+
+    void display() const {
+        for (int rank = 7; rank >= 0; --rank) {
+            for (int file = 0; file < 8; ++file) {
+                const int idx = rank * 8 + file;
+                const auto piece_color = static_cast<Color>((side_occupancy[1] >> idx) & 1);
+                std::cout << piece_to_char(pieces[idx], piece_color) << ' ';
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl << std::endl;;
     }
 };
 
