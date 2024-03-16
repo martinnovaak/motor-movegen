@@ -39,39 +39,39 @@ public:
     chessmove() : packed_move_data{} {}
 
     chessmove(Square from, Square to, MoveType move_type) {
-        packed_move_datamove_data = from | to << 6 | move_type << 12;
+        packed_move_data = from | to << 6 | move_type << 12;
     }
 
     chessmove(Square from, Square to, MoveType move_type, Piece piece_type) {
-        packed_move_datamove_data = from | to << 6 | move_type << 12 | piece_type << 16;
+        packed_move_data = from | to << 6 | move_type << 12 | piece_type << 16;
     }
 
     chessmove(Square from, Square to, MoveType move_type, Piece piece_type, Piece captured) {
-        packed_move_datamove_data = from | to << 6 | move_type << 12 | piece_type << 16 | captured << 19;
+        packed_move_data = from | to << 6 | move_type << 12 | piece_type << 16 | captured << 19;
     }
 
     [[nodiscard]] Square get_from() const {
-        return static_cast<Square>((packed_move_datamove_data) & 0b111111);
+        return static_cast<Square>((packed_move_data) & 0b111111);
     }
 
     [[nodiscard]] Square get_to() const {
-        return static_cast<Square>((packed_move_datamove_data >> 6) & 0b111111);
+        return static_cast<Square>((packed_move_data >> 6) & 0b111111);
     }
 
     [[nodiscard]] MoveType get_move_type() const {
-        return static_cast<MoveType>((packed_move_datamove_data >> 12) & 0b1111);
+        return static_cast<MoveType>((packed_move_data >> 12) & 0b1111);
     }
 
     [[nodiscard]] Piece get_piece() const {
-        return static_cast<Piece>(packed_move_datamove_data >> 16 & 0b111);
+        return static_cast<Piece>(packed_move_data >> 16 & 0b111);
     }
 
     [[nodiscard]] Piece get_captured_piece() const {
-        return static_cast<Piece>(packed_move_datamove_data >> 19 & 0b111);
+        return static_cast<Piece>(packed_move_data >> 19 & 0b111);
     }
 
     bool operator==(const chessmove & other_move) const {
-        return other_move.packed_move_datamove_data == packed_move_datamove_data;
+        return other_move.packed_move_data == packed_move_data;
     }
 
     [[nodiscard]] bool is_quiet() const {
